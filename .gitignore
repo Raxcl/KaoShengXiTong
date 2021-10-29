@@ -1,0 +1,27 @@
+*.class
+*.log
+*.lock
+
+#Package Files #
+#*.jar
+*.war
+*.ear
+target/
+out/
+META-INF/
+
+# idea
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea
+.classpath
+.project
+.settings/
+bin/
+tmp/
+
+#rebel
+*rebel.xml*
+

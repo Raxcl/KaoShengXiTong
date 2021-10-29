@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>考生报名主页</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" href="css/register.css">
+
+    <!--导入jquery-->
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+
+        //入口函数
+        $(function () {
+            //当表单提交时，调用所有的校验方法
+            $("#baoming").submit(function () {
+
+                //发送ajax请求，提交表单的数据
+                $.post("user/baoming",$(this).serialize(),function (data) {
+                    //处理服务器响应的数据 data {flag:true,errorMsg:"注册失败"}
+                    if(data.flag){
+                        //注册成功，跳转成功页面
+                        location.href="baoming_ok.html";
+                    }else {
+                        //注册失败，给errorMsg添加提示信息
+                        $("#errorMsg").html(data.errorMsg);
+                    }
+                });
+
+                //2.跳转页面
+                return false;
+                //如果这个方法没有返回值，或者返回位true，则	表单提交；如果返回false，则表单不提交
+            });
+
+        });
+    </script>
+</head>
+<body>
+<!--引入头部-->
+<div id="header"></div>
+<!-- 头部 end -->
+<div class="rg_layout">
+    <div class="rg_form clearfix">
+        <div class="rg_form_left">
+            <p>报名基本信息</p>
+            <p>USER BAOMING</p>
+
+        </div>
+        <div class="rg_form_center">
+            <div id="errorMsg" style="color:red;text-align: center"></div>
+            <!--注册表单-->
+            <form id="baoming">
+                <!--提交处理请求的标识符-->
+                <input type="hidden" name="action" value="register">
+                <table style="margin-top: 25px;">
+                    <tr>
+                        <td class="td_left">
+                            <label for="name">姓名</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="text" id="name" name="name" placeholder="请输入姓名">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">
+                            <label for="id">身份证号</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="text" id="id" name="id" placeholder="请输入身份证号">
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="td_left">
+                            <label for="birthday">出生日期</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="date" id="birthday" name="birthday" placeholder="年/月/日">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">
+                            <label for="sex">性别</label>
+                        </td>
+                        <td class="td_right gender">
+                            <input type="radio" id="sex" name="sex" value="男" checked> 男
+                            <input type="radio" name="sex" value="女"> 女
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">
+                            <label for="telephone">手机号</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="text" id="telephone" name="telephone" placeholder="请输入您的手机号">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_left">
+                            <label for="youbian">邮编号</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="text" id="youbian" name="youbian" placeholder="请输入邮编号">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">
+                            <label for="shengfen">报考省份</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="text" id="shengfen" name="shengfen" placeholder="请输入报考省份">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">
+                            <label for="jibie">报考级别</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="text" id="jibie" name="jibie" placeholder="请输入级别：一级-四级">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">
+                            <label for="status">是否报名</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="text" id="status" name="status" placeholder="请输入0或1：1代表确认报名考试">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_left">
+                        </td>
+                        <td class="td_right check">
+                            <input type="submit" id="register" class="submit" value="报名">
+                            <span id="msg" style="color: red;"></span>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!--导入布局js，共享header和footer-->
+<script type="text/javascript" src="js/include.js"></script>
+
+</body>
+</html>
